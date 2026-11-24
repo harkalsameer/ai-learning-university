@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Chatbot Lab | AI Learning University</title>
+<style>
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b1020;
+  color: #f5f7ff;
+}
+header {
+  padding: 20px;
+  background: #141d35;
+  border-bottom: 1px solid #293553;
+}
+header a {
+  color: #8bb7ff;
+  text-decoration: none;
+}
+.container {
+  max-width: 850px;
+  margin: 35px auto;
+  padding: 15px;
+}
+h1 {
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+.subtitle {
+  color: #aab6ce;
+  line-height: 1.6;
+}
+.chatbox {
+  background: #141d35;
+  border: 1px solid #293553;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 25px;
+}
+.chat-header {
+  padding: 17px;
+  border-bottom: 1px solid #293553;
+  font-weight: bold;
+}
+.messages {
+  height: 380px;
+  overflow-y: auto;
+  padding: 17px;
+}
+.message {
+  padding: 12px 15px;
+  margin: 10px 0;
+  border-radius: 12px;
+  max-width: 85%;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.bot {
+  background: #263653;
+  color: white;
+}
+.user {
+  background: #245bc0;
+  margin-left: auto;
+}
+.input-area {
+  display: flex;
+  gap: 8px;
+  padding: 13px;
+  border-top: 1px solid #293553;
+}
+input {
+  flex: 1;
+  min-width: 0;
+  padding: 14px;
+  border-radius: 9px;
+  border: 1px solid #435273;
+  background: #0b1020;
+  color: white;
+  font-size: 16px;
+}
+button {
+  padding: 12px 17px;
+  background: #3978ee;
+  color: white;
+  border: 0;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: bold;
+}
+button:hover {
+  background: #245bc0;
+}
+.examples {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+.examples button {
+  background: #263653;
+  font-size: 13px;
+}
+.info {
+  margin-top: 25px;
+  padding: 18px;
+  background: #141d35;
+  border-radius: 12px;
+  line-height: 1.7;
+  color: #bdc9df;
+}
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #8996b0;
+  font-size: 13px;
+}
+@media(max-width:500px) {
+  h1 { font-size: 25px; }
+  .messages { height: 350px; }
+  .input-area { flex-wrap: wrap; }
+  .input-area button { width: 100%; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a href="index.html">← AI Learning University</a>
+</header>
+
+<main class="container">
+  <h1>🤖 AI Chatbot Lab</h1>
+  <p class="subtitle">
+    Welcome to the interactive chatbot simulator.
+    Ask questions and discover the basics of Artificial Intelligence.
+  </p>
+
+  <section class="chatbox">
+    <div class="chat-header">
+      AI Learning Assistant
+    </div>
+
+    <div class="messages" id="messages" aria-live="polite">
+      <div class="message bot">
+        Hello! Welcome to AI Learning University.
+
+        I am an educational chatbot simulator.
+        Ask me about AI, Python, Machine Learning or Neural Networks!
+      </div>
+    </div>
+
+    <div class="input-area">
+      <input
+        type="text"
+        id="userInput"
+        placeholder="Ask something about AI..."
+        aria-label="Your question"
+      >
+      <button id="sendButton" type="button">Send</button>
+    </div>
+  </section>
+
+  <h3>Try these questions:</h3>
+  <div class="examples">
+    <button type="button" data-question="What is AI?">What is AI?</button>
+    <button type="button" data-question="What is Python?">What is Python?</button>
+    <button type="button" data-question="What is machine learning?">Machine Learning</button>
+    <button type="button" data-question="What is a neural network?">Neural Networks</button>
+    <button type="button" data-question="What is deep learning?">Deep Learning</button>
+  </div>
+
+  <section class="info">
+    <h3>📚 How does this chatbot work?</h3>
+    This beginner demonstration uses JavaScript keyword matching
+    to select pre-written educational answers.
+
+    Real AI chatbots can use machine learning, language models
+    and neural networks to generate responses.
+
+    <h3>🎯 What will you learn?</h3>
+    • How chat interfaces work<br>
+    • How JavaScript processes user input<br>
+    • How a simple response system works<br>
+    • The difference between a simulator and real AI
+  </section>
+</main>
+
+<footer>
+  © 2026 AI Learning University | Free AI Education
+</footer>
+
+<script>
+const messages = document.getElementById("messages");
+const input = document.getElementById("userInput");
+const sendButton = document.getElementById("sendButton");
+
+const knowledge = [
+  {
+    keywords: ["hello", "hi", "hey"],
+    answer: "Hello! What would you like to learn about Artificial Intelligence today?"
+  },
+  {
+    keywords: ["what is ai", "artificial intelligence"],
+    answer: "Artificial Intelligence (AI) is a field of computer science that develops systems capable of performing tasks that normally require human intelligence, such as recognizing patterns, understanding language and making predictions."
+  },
+  {
+    keywords: ["python"],
+    answer: "Python is a popular, beginner-friendly programming language. It is widely used in AI, data science, automation and machine learning."
+  },
+  {
+    keywords: ["machine learning", "ml"],
+    answer: "Machine Learning is a branch of AI in which computers learn patterns from data and use those patterns to make predictions or decisions."
+  },
+  {
+    keywords: ["neural network", "neural networks"],
+    answer: "A neural network is a computing model inspired by the way biological brains process information. It contains connected units called artificial neurons, organized into layers."
+  },
+  {
+    keywords: ["deep learning"],
+    answer: "Deep Learning is a part of Machine Learning that uses neural networks with multiple layers to learn complex patterns from data."
+  },
+  {
+    keywords: ["chatbot"],
+    answer: "A chatbot is a software application designed to communicate with users through text or speech. Some use predefined responses, while advanced chatbots use large language models."
+  },
+  {
+    keywords: ["how do you work", "how does this work"],
+    answer: "I am a simple educational simulator. JavaScript checks your message for certain keywords and selects a matching answer from a predefined collection. I do not understand or generate language like a real AI model."
+  },
+  {
+    keywords: ["thank"],
+    answer: "You're welcome! Keep exploring and learning. Consistent practice is the key to understanding AI."
+  }
+];
+
+function addMessage(text, type) {
+  const message = document.createElement("div");
+  message.className = "message " + type;
+  message.textContent = text;
+  messages.appendChild(message);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function getAnswer(question) {
+  const normalized = question.toLowerCase().replace(/[^\w\s]/g, " ");
+
+  for (const item of knowledge) {
+    if (item.keywords.some(keyword =>
+      normalized.includes(keyword)
+    )) {
+      return item.answer;
+    }
+  }
+
+  return "I don't have a prepared answer for that question yet. Try asking about AI, Python, Machine Learning, Neural Networks or Deep Learning.";
+}
+
+function sendMessage(text) {
+  const question = text.trim();
+
+  if (!question) return;
+
+  addMessage(question, "user");
+  input.value = "";
+
+  const answer = getAnswer(question);
+
+  setTimeout(() => {
+    addMessage(answer, "bot");
+  }, 300);
+}
+
+sendButton.addEventListener("click", () => {
+  sendMessage(input.value);
+});
+
+input.addEventListener("keydown", event => {
+  if (event.key === "Enter") {
+    sendMessage(input.value);
+  }
+});
+
+document.querySelectorAll("[data-question]").forEach(button => {
+  button.addEventListener("click", () => {
+    sendMessage(button.dataset.question);
+  });
+});
+</script>
+
+</body>
+</html>
